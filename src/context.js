@@ -5,6 +5,10 @@ const table = {
   animals: 27,
   history: 23,
   science_nature: 17,
+  general_knowledge: 9,
+  film: 11,
+  geography: 22,
+  computer: 18,
 };
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?';
