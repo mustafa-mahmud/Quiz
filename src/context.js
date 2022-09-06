@@ -35,12 +35,19 @@ const AppProvider = ({ children }) => {
         const { question, incorrect_answers, correct_answer } = res;
         let answers = [...incorrect_answers];
 
-        const randomNum = Math.floor(Math.random() * answers.length);
+        const random = Math.floor(Math.random() * answers.length);
 
-        console.log(randomNum);
+        if (random === answers.length - 1) {
+          answers.push(correct_answer);
+        } else {
+          answers.push(answers[random]);
+          answers[random] = correct_answer;
+        }
+
         return { question, correctAns: correct_answer, allAnswers: answers };
       });
 
+      console.log(newQuestions);
       setQuestions(newQuestions);
       setLoading(false);
     }
