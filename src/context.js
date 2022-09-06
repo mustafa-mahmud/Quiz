@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
 const table = {
@@ -33,7 +33,11 @@ const AppProvider = ({ children }) => {
     if (res.data.results.length > 0) {
       const newQuestions = res.data.results.map((res) => {
         const { question, incorrect_answers, correct_answer } = res;
-        const answers = [...incorrect_answers, correct_answer];
+        let answers = [...incorrect_answers];
+
+        const randomNum = Math.floor(Math.random() * answers.length);
+
+        console.log(randomNum);
         return { question, correctAns: correct_answer, allAnswers: answers };
       });
 
@@ -55,7 +59,12 @@ const AppProvider = ({ children }) => {
     setIndex((oldState) => {
       const nextIndex = (oldState += 1);
 
-      if (nextIndex > questions.length - 1) return setIsModalOpen(true);
+      if (nextIndex > questions.length - 1) {
+        setIsModalOpen(true);
+
+        return 0;
+      }
+
       return nextIndex;
     });
   };
